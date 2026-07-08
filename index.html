@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>年度員工團盛典</title>
+  <style>
+    :root {
+      --ink: #1f2633;
+      --muted: #6f7480;
+      --ivory: #fffaf0;
+      --card: rgba(255, 252, 244, 0.94);
+      --champagne: #d8b66a;
+      --champagne-dark: #9a7530;
+      --wine: #7d2638;
+      --navy: #142235;
+      --blue: #243d63;
+      --shadow: rgba(9, 18, 31, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(14, 25, 42, 0.82), rgba(14, 25, 42, 0.48) 48%, rgba(255, 250, 240, 0.68)),
+        linear-gradient(180deg, rgba(255, 250, 240, 0.08), rgba(255, 250, 240, 0.9) 72%),
+        url("https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1800&q=82");
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 72% 0%, rgba(216, 182, 106, 0.24), transparent 30rem),
+        linear-gradient(180deg, rgba(20, 34, 53, 0.12), rgba(255, 250, 240, 0.18));
+      backdrop-filter: blur(2px);
+    }
+
+    .page {
+      position: relative;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 30px 0 130px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 330px;
+      padding: clamp(28px, 6vw, 72px);
+      overflow: hidden;
+      border: 1px solid rgba(216, 182, 106, 0.46);
+      border-radius: 24px;
+      color: #fff;
+      background:
+        linear-gradient(125deg, rgba(20, 34, 53, 0.94), rgba(36, 61, 99, 0.86) 58%, rgba(125, 38, 56, 0.7)),
+        linear-gradient(90deg, rgba(216, 182, 106, 0.18), transparent 42%);
+      box-shadow: 0 30px 80px var(--shadow), inset 0 0 0 1px rgba(255, 250, 240, 0.18);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(216, 182, 106, 0.16);
+    }
+
+    .hero::before {
+      width: 260px;
+      height: 260px;
+      right: -80px;
+      top: -70px;
+    }
+
+    .hero::after {
+      width: 150px;
+      height: 150px;
+      left: 48%;
+      bottom: -72px;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(42px, 8vw, 92px);
+      line-height: 1;
+      letter-spacing: 0;
+      font-family: "Noto Serif TC", "Microsoft JhengHei", serif;
+      font-weight: 900;
+      text-wrap: balance;
+      text-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+    }
+
+    .hero .rules {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: clamp(15px, 1.55vw, 19px);
+      font-weight: 700;
+      line-height: 1.62;
+      color: rgba(255, 250, 240, 0.92);
+    }
+
+    .hero .rules li {
+      margin: 4px 0;
+    }
+
+    .hero .ribbon {
+      position: absolute;
+      right: clamp(18px, 5vw, 70px);
+      bottom: clamp(18px, 4vw, 46px);
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: clamp(120px, 16vw, 180px);
+      aspect-ratio: 1;
+      border: 8px solid rgba(255, 255, 255, 0.75);
+      border-radius: 50%;
+      color: #fff4ca;
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 1000;
+      text-align: center;
+      transform: rotate(9deg);
+      background: rgba(20, 34, 53, 0.14);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 24px 0;
+      padding: 14px 18px;
+      border: 1px solid rgba(216, 182, 106, 0.28);
+      border-radius: 18px;
+      background: rgba(255, 250, 240, 0.8);
+      box-shadow: 0 18px 42px rgba(9, 18, 31, 0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .toolbar strong {
+      font-size: 20px;
+      color: var(--navy);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .toolbar input,
+    .toolbar select {
+      width: min(380px, 100%);
+      min-height: 46px;
+      padding: 10px 15px;
+      border: 1px solid rgba(36, 61, 99, 0.18);
+      border-radius: 999px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.72);
+      font: inherit;
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+
+    .toolbar select {
+      width: 190px;
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position: calc(100% - 22px) 19px, calc(100% - 16px) 19px;
+      background-size: 7px 7px, 7px 7px;
+      background-repeat: no-repeat;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .tour-card {
+      position: relative;
+      display: flex;
+      min-height: 330px;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 24px;
+      border: 1px solid rgba(216, 182, 106, 0.34);
+      border-radius: 16px;
+      background: var(--card);
+      box-shadow: 0 22px 54px rgba(9, 18, 31, 0.16);
+      backdrop-filter: blur(8px);
+    }
+
+    .tour-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 6px;
+      background: linear-gradient(90deg, var(--champagne-dark), var(--champagne), #f5e2ac, var(--champagne-dark));
+    }
+
+    .tour-card::after {
+      content: "年度限定";
+      position: absolute;
+      top: 18px;
+      right: -34px;
+      width: 138px;
+      padding: 7px 0;
+      color: var(--navy);
+      background: linear-gradient(90deg, #e7cd88, #f7e7b8);
+      font-size: 14px;
+      font-weight: 900;
+      text-align: center;
+      transform: rotate(38deg);
+      box-shadow: 0 8px 18px rgba(154, 117, 48, 0.22);
+    }
+
+    .tour-card h2 {
+      width: calc(100% - 54px);
+      margin: 12px 0 16px;
+      color: var(--ink);
+      font-size: 26px;
+      line-height: 1.25;
+      letter-spacing: 0;
+      font-family: "Noto Serif TC", "Microsoft JhengHei", serif;
+      font-weight: 900;
+      word-break: break-word;
+    }
+
+    .details {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 14px 0 0;
+      border-top: 1px solid rgba(36, 61, 99, 0.14);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .details div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .details dd {
+      margin: 0;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .price {
+      margin: 18px 0;
+      color: var(--wine);
+      font-size: clamp(24px, 2.7vw, 32px);
+      font-weight: 1000;
+      line-height: 1.22;
+      word-break: keep-all;
+    }
+
+    .tour-code,
+    button {
+      min-height: 46px;
+      border: 0;
+      border-radius: 999px;
+      color: var(--ivory);
+      background: linear-gradient(90deg, var(--navy), var(--blue));
+      font: inherit;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 10px 22px rgba(20, 34, 53, 0.22);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .tour-code {
+      display: grid;
+      place-items: center;
+      padding: 10px 14px;
+      letter-spacing: 0.02em;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(20, 34, 53, 0.3);
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 28px;
+      border: 3px dashed rgba(40, 33, 47, 0.2);
+      border-radius: 18px;
+      background: rgba(255, 250, 240, 0.78);
+      color: var(--muted);
+      text-align: center;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .easter-egg {
+      position: fixed;
+      right: 18px;
+      bottom: 14px;
+      z-index: 5;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      transform: scale(0.92);
+      transform-origin: right bottom;
+    }
+
+    .speech {
+      max-width: 150px;
+      margin-bottom: 54px;
+      padding: 8px 10px;
+      border: 2px solid rgba(40, 33, 47, 0.16);
+      border-radius: 14px 14px 14px 4px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.92);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.35;
+      box-shadow: 0 10px 24px rgba(40, 33, 47, 0.14);
+    }
+
+    .building {
+      position: relative;
+      width: 118px;
+      height: 112px;
+      border-radius: 10px 10px 0 0;
+      background: linear-gradient(180deg, #454052, #2c2938);
+      box-shadow: 0 12px 24px rgba(40, 33, 47, 0.26);
+    }
+
+    .building::before {
+      content: "";
+      position: absolute;
+      inset: 12px 12px auto;
+      height: 52px;
+      background:
+        linear-gradient(90deg, #ffd66b 0 16px, transparent 16px 28px, #82d7ff 28px 44px, transparent 44px 56px, #ffd66b 56px 72px, transparent 72px),
+        linear-gradient(90deg, #82d7ff 0 16px, transparent 16px 28px, #ffd66b 28px 44px, transparent 44px 56px, #82d7ff 56px 72px, transparent 72px);
+      background-size: 84px 22px;
+      background-position: 0 0, 0 30px;
+      background-repeat: no-repeat;
+    }
+
+    .roof {
+      position: absolute;
+      left: -8px;
+      right: -8px;
+      top: -12px;
+      height: 18px;
+      border-radius: 6px;
+      background: #242130;
+    }
+
+    .rail {
+      position: absolute;
+      left: 6px;
+      right: 6px;
+      top: -32px;
+      height: 26px;
+      border-top: 4px solid #fff;
+      border-bottom: 3px solid rgba(255, 255, 255, 0.75);
+    }
+
+    .rail::before {
+      content: "";
+      position: absolute;
+      inset: -3px 10px;
+      background: repeating-linear-gradient(90deg, #fff 0 4px, transparent 4px 18px);
+    }
+
+    .person {
+      position: absolute;
+      left: 48px;
+      top: -67px;
+      width: 28px;
+      height: 46px;
+    }
+
+    .person::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ffd4b0;
+      box-shadow: 0 0 0 3px #2a2538;
+    }
+
+    .person::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 17px;
+      width: 16px;
+      height: 24px;
+      border-radius: 8px 8px 3px 3px;
+      background: var(--coral);
+      box-shadow:
+        -10px 6px 0 -5px #2a2538,
+        10px 6px 0 -5px #2a2538,
+        -4px 26px 0 -2px #2a2538,
+        8px 26px 0 -2px #2a2538;
+    }
+
+    @media (max-width: 900px) {
+      .board {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero .ribbon {
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 12px;
+      }
+
+      .hero {
+        min-height: 360px;
+        padding: 28px 20px;
+        border-radius: 20px;
+      }
+
+      .hero .ribbon {
+        right: 16px;
+        bottom: 18px;
+      }
+
+      .tour-card {
+        min-height: 300px;
+      }
+
+      .board {
+        grid-template-columns: 1fr;
+      }
+
+      .filters,
+      .toolbar input,
+      .toolbar select {
+        width: 100%;
+      }
+
+      .easter-egg {
+        transform: scale(0.72);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <h1 id="page-title">年度員工團盛典</h1>
+      <ol class="rules" aria-label="規則說明">
+        <li>規則說明：</li>
+        <li>(1)不手動KK，依入帳時間為主，搶到的人請盡快付款！</li>
+        <li>(2)員工本人請務必入完整姓名。</li>
+      </ol>
+      <div class="ribbon" aria-hidden="true">超值<br>開跑</div>
+    </section>
+
+    <section class="toolbar" aria-label="搜尋與統計">
+      <strong id="countText">目前 0 組年度好團</strong>
+      <div class="filters">
+        <select id="regionFilter" aria-label="地區篩選">
+          <option value="all">全部地區</option>
+        </select>
+        <input id="searchInput" type="search" placeholder="搜尋團名、團號或出發日">
+      </div>
+    </section>
+
+    <section class="board" id="tourBoard" aria-live="polite"></section>
+  </main>
+
+  <aside class="easter-egg" aria-label="內部小彩蛋">
+    <div class="speech">TP、RC要跳樓了</div>
+    <div class="building" aria-hidden="true">
+      <div class="rail"></div>
+      <div class="roof"></div>
+      <div class="person"></div>
+    </div>
+  </aside>
+
+  <script>
+    const sampleTours = [
+      {
+        region: "西班牙&葡萄牙",
+        name: "員工特選西班牙雙宮山城海濱小鎮11日",
+        code: "26ESN15TKB",
+        date: "11/15出發",
+        price: "員工66900 / 親友69900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "https://travel.liontravel.com/detail?NormGroupID=aa2b4f96-fbf6-4cb7-94ee-2f69dce23c53&GroupID=26ESN15TKB-T&Platform=APP"
+      },
+      {
+        region: "西班牙&葡萄牙",
+        name: "員工特選葡萄牙雙城輕漫遊Outlet10日",
+        code: "26ESN23EY",
+        date: "11/23出發",
+        price: "員工53900 / 親友56900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "https://travel.liontravel.com/detail?NormGroupID=b8533d3a-5f64-4e29-8c84-a5f219bbc77d&GroupID=26ESN23EY-T&Platform=APP"
+      },
+      {
+        region: "西班牙&葡萄牙",
+        name: "員工特選西班牙巨石中段高第建築(冬)11日",
+        code: "26ESD09EY",
+        date: "12/09出發",
+        price: "員工73900 / 親友76900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "https://travel.liontravel.com/detail?NormGroupID=80fceb1c-af15-4441-a1cf-bbe18bdb254b&GroupID=26ESD09EY-T&Platform=APP"
+      },
+      {
+        region: "奧地利&捷克",
+        name: "員工特選奧捷國王湖10日",
+        code: "26EEN20JX",
+        date: "11/20出發",
+        price: "員工49900 / 親友52900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "#"
+      },
+      {
+        region: "奧地利&捷克",
+        name: "員工特選奧捷國王湖10日",
+        code: "26EED02JX",
+        date: "12/4出發",
+        price: "員工49900 / 親友52900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "#"
+      },
+      {
+        region: "德國&瑞士",
+        name: "員工經典德瑞雙峰湖區景觀火車10日",
+        code: "26EUD04CIA",
+        date: "12/04出發",
+        price: "員工67900 / 親友69900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "#"
+      },
+      {
+        region: "德國&瑞士",
+        name: "員工經典德瑞雙峰湖區景觀火車10日",
+        code: "27EU118CIA",
+        date: "1/18出發",
+        price: "員工67900 / 親友69900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "#"
+      },
+      {
+        region: "義大利",
+        name: "員工特選北義五大名城多洛米緹10日",
+        code: "26EID15CIC",
+        date: "12/15出發",
+        price: "員工57900 / 親友59900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "#"
+      },
+      {
+        region: "義大利",
+        name: "員工特選北義五大名城多洛米緹10日",
+        code: "27EI119CIC",
+        date: "1/19出發",
+        price: "員工57900 / 親友59900",
+        note: "皆為現金價，刷卡請自行+2%",
+        link: "#"
+      }
+    ];
+
+    const storageKey = "annualStaffTourItems";
+    const storageVersionKey = "annualStaffTourVersion";
+    const dataVersion = "2026-07-08-italy-01";
+    const board = document.querySelector("#tourBoard");
+    const searchInput = document.querySelector("#searchInput");
+    const regionFilter = document.querySelector("#regionFilter");
+    const countText = document.querySelector("#countText");
+
+    let tours = loadTours();
+
+    function inferRegion(tour) {
+      const text = `${tour.region || ""} ${tour.name || ""}`;
+      if (text.includes("奧地利") || text.includes("捷克")) return "奧地利&捷克";
+      if (text.includes("西班牙") || text.includes("葡萄牙")) return "西班牙&葡萄牙";
+      if (text.includes("德國") || text.includes("瑞士") || text.includes("德瑞")) return "德國&瑞士";
+      if (text.includes("義大利") || text.includes("北義")) return "義大利";
+      if (text.includes("義大利") || text.includes("希臘")) return "義大利&希臘";
+      return tour.region || "其他地區";
+    }
+
+    function normalizeTours(items) {
+      return items.map((tour) => ({
+        ...tour,
+        region: inferRegion(tour)
+      }));
+    }
+
+    function renderRegionOptions() {
+      const regions = [...new Set(tours.map((tour) => tour.region || "其他地區"))];
+      regionFilter.innerHTML = [
+        '<option value="all">全部地區</option>',
+        ...regions.map((region) => `<option value="${escapeHtml(region)}">${escapeHtml(region)}</option>`)
+      ].join("");
+    }
+
+    function loadTours() {
+      if (localStorage.getItem(storageVersionKey) !== dataVersion) {
+        localStorage.setItem(storageVersionKey, dataVersion);
+        localStorage.setItem(storageKey, JSON.stringify(sampleTours));
+        return normalizeTours(sampleTours);
+      }
+
+      const saved = localStorage.getItem(storageKey);
+      if (!saved) return normalizeTours(sampleTours);
+
+      try {
+        const parsed = JSON.parse(saved);
+        return Array.isArray(parsed) ? normalizeTours(parsed) : normalizeTours(sampleTours);
+      } catch {
+        return normalizeTours(sampleTours);
+      }
+    }
+
+    function saveTours() {
+      localStorage.setItem(storageKey, JSON.stringify(tours));
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderTours() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      const selectedRegion = regionFilter.value;
+      const filtered = tours.filter((tour) => {
+        const matchesRegion = selectedRegion === "all" || (tour.region || "其他地區") === selectedRegion;
+        const matchesKeyword = [tour.region, tour.name, tour.code, tour.date, tour.price]
+          .join(" ")
+          .toLowerCase()
+          .includes(keyword);
+        return matchesRegion && matchesKeyword;
+      });
+
+      countText.textContent = `目前 ${filtered.length} 組年度好團`;
+
+      if (filtered.length === 0) {
+        board.innerHTML = '<div class="empty">暫無符合條件的員工團</div>';
+        return;
+      }
+
+      board.innerHTML = filtered.map((tour) => `
+        <article class="tour-card">
+          <div>
+            <h2>${escapeHtml(tour.name)}</h2>
+            <dl class="details">
+              <div><dt>出發日</dt><dd>${escapeHtml(tour.date)}</dd></div>
+              ${tour.note ? `<div><dt>備註</dt><dd>${escapeHtml(tour.note)}</dd></div>` : ""}
+            </dl>
+          </div>
+          <div>
+            <div class="price">${escapeHtml(tour.price)}</div>
+            <div class="tour-code">${escapeHtml(tour.code)}</div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    searchInput.addEventListener("input", renderTours);
+    regionFilter.addEventListener("change", renderTours);
+
+    renderRegionOptions();
+    renderTours();
+  </script>
+</body>
+</html>
