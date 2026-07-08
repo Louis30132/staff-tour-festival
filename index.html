@@ -474,6 +474,7 @@
         <li>規則說明：</li>
         <li>(1)不手動KK，依入帳時間為主，搶到的人請盡快付款！</li>
         <li>(2)員工本人請務必入完整姓名。</li>
+        <li>(3)每張訂單至少一名員工。</li>
       </ol>
       <div class="ribbon" aria-hidden="true">超值<br>開跑</div>
     </section>
@@ -537,6 +538,7 @@
     }
 
     function renderCard(tour) {
+      const priceLines = escapeHtml(tour.price).replace(" / ", " /<br>");
       return `
         <article class="tour-card">
           <div>
@@ -547,7 +549,7 @@
             </dl>
           </div>
           <div>
-            <div class="price">${escapeHtml(tour.price)}</div>
+            <div class="price">${priceLines}</div>
             <div class="tour-code">${escapeHtml(tour.code)}</div>
           </div>
         </article>
