@@ -290,19 +290,6 @@
       line-height: 1.22;
     }
 
-    .tour-code {
-      display: grid;
-      min-height: 46px;
-      place-items: center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      color: var(--ivory);
-      background: linear-gradient(90deg, var(--navy), var(--blue));
-      font-weight: 900;
-      letter-spacing: 0.02em;
-      box-shadow: 0 10px 22px rgba(20, 34, 53, 0.22);
-    }
-
     .empty {
       grid-column: 1 / -1;
       padding: 28px;
@@ -507,7 +494,7 @@
       { region: "西班牙&葡萄牙", name: "員工特選葡萄牙雙城輕漫遊Outlet10日", code: "26ESN23EY", date: "11/23出發", price: "員工53,900 / 親友56,900" },
       { region: "西班牙&葡萄牙", name: "員工特選西班牙巨石中段高第建築(冬)11日", code: "26ESD09EY", date: "12/09出發", price: "員工73,900 / 親友76,900" },
       { region: "奧地利&捷克", name: "員工特選奧捷國王湖10日", code: "26EEN20JX", date: "11/20出發", price: "員工49,900 / 親友52,900" },
-      { region: "奧地利&捷克", name: "員工特選奧捷國王湖10日", code: "26EED02JX", date: "12/04出發", price: "員工49,900 / 親友52,900" },
+      { region: "奧地利&捷克", name: "員工特選奧捷國王湖10日", code: "26EED02JX", date: "12/02出發", price: "員工49,900 / 親友52,900" },
       { region: "德國&瑞士", name: "員工經典德瑞雙峰湖區景觀火車10日", code: "26EUD04CIA", date: "12/04出發", price: "員工67,900 / 親友69,900" },
       { region: "德國&瑞士", name: "員工經典德瑞雙峰湖區景觀火車10日", code: "27EU118CIA", date: "01/18出發", price: "員工67,900 / 親友69,900" },
       { region: "義大利", name: "員工特選北義五大名城多洛米緹10日", code: "26EID15CIC", date: "12/15出發", price: "員工57,900 / 親友59,900" },
@@ -546,12 +533,12 @@
             <h2>${escapeHtml(tour.name)}</h2>
             <dl class="details">
               <div><dt>出發日</dt><dd>${escapeHtml(tour.date)}</dd></div>
+              <div><dt>團號</dt><dd>${escapeHtml(tour.code)}</dd></div>
               <div><dt>備註</dt><dd>${note}</dd></div>
             </dl>
           </div>
           <div>
             <div class="price">${priceLines}</div>
-            <div class="tour-code">${escapeHtml(tour.code)}</div>
           </div>
         </article>
       `;
