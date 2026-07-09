@@ -235,23 +235,24 @@
 
     .flag-badge {
       position: absolute;
-      top: -2px;
-      right: -2px;
-      width: 118px;
-      height: 118px;
-      clip-path: polygon(0 0, 100% 0, 100% 100%);
+      top: 18px;
+      right: -34px;
+      width: 138px;
+      height: 34px;
       background: var(--flag);
+      border-radius: 5px;
       filter: drop-shadow(-8px 8px 12px rgba(20, 34, 53, 0.18));
+      transform: rotate(38deg);
     }
 
     .flag-badge::after {
       content: "";
       position: absolute;
       inset: 0;
+      border-radius: inherit;
       background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 36%),
-        linear-gradient(315deg, rgba(0, 0, 0, 0.22), transparent 24%);
-      clip-path: inherit;
+        linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 45%),
+        linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.22));
     }
 
     .tour-card h2 {
