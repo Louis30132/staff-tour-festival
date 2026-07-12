@@ -536,6 +536,19 @@
       ].join("");
     }
 
+    function groupTours(items) {
+      const groups = new Map();
+      items.forEach((tour) => {
+        const key = [tour.region, tour.name, tour.price].join("|");
+        if (!groups.has(key)) {
+          groups.set(key, { ...tour, dates: [], codes: [] });
+        }
+        groups.get(key).dates.push(tour.date);
+        groups.get(key).codes.push(tour.code);
+      });
+      return [...groups.values()];
+    }
+
     function renderCard(tour) {
       const priceLines = escapeHtml(tour.price).replace(" / ", " /<br>");
       return `
@@ -544,8 +557,8 @@
           <div>
             <h2>${escapeHtml(tour.name)}</h2>
             <dl class="details">
-              <div><dt>出發日</dt><dd>${escapeHtml(tour.date)}</dd></div>
-              <div><dt>團號</dt><dd class="code">${escapeHtml(tour.code)}</dd></div>
+              <div><dt>出發日</dt><dd>${escapeHtml(tour.dates.join("、"))}</dd></div>
+              <div><dt>團號</dt><dd class="code">${escapeHtml(tour.codes.join("、"))}</dd></div>
               <div><dt>備註</dt><dd>${note}</dd></div>
             </dl>
           </div>
@@ -559,9 +572,10 @@
     function renderTours() {
       const keyword = searchInput.value.trim().toLowerCase();
       const selectedRegion = regionFilter.value;
-      const filtered = tours.filter((tour) => {
+      const groupedTours = groupTours(tours);
+      const filtered = groupedTours.filter((tour) => {
         const matchesRegion = selectedRegion === "all" || tour.region === selectedRegion;
-        const matchesKeyword = [tour.region, tour.name, tour.code, tour.date, tour.price]
+        const matchesKeyword = [tour.region, tour.name, tour.codes.join(" "), tour.dates.join(" "), tour.price]
           .join(" ")
           .toLowerCase()
           .includes(keyword);
