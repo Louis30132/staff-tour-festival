@@ -487,6 +487,7 @@
         <li>(1)不手動KK，依入帳時間為主，搶到的人請盡快付款！</li>
         <li>(2)員工本人請務必入完整姓名。</li>
         <li>(3)每張訂單至少一名員工。</li>
+        <li>(4)此頁面無法點擊連結，須前往SERP系統瀏覽。</li>
       </ol>
       <div class="ribbon" aria-hidden="true">超值<br>開跑</div>
     </section>
@@ -515,16 +516,16 @@
 
   <script>
     const tours = [
-      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選西班牙雙宮山城海濱小鎮11日", code: "26ESN15TKB", date: "11/15出發", price: "員工66,900 / 親友69,900", link: "https://travel.liontravel.com/detail?NormGroupID=aa2b4f96-fbf6-4cb7-94ee-2f69dce23c53&GroupID=26ESN15TKB-T&Platform=APP" },
-      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選葡萄牙雙城輕漫遊Outlet10日", code: "26ESN23EY", date: "11/23出發", price: "員工53,900 / 親友56,900", link: "https://travel.liontravel.com/detail?NormGroupID=b8533d3a-5f64-4e29-8c84-a5f219bbc77d&GroupID=26ESN23EY-T&Platform=APP" },
-      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選西班牙巨石中段高第建築(冬)11日", code: "26ESD09EY", date: "12/09出發", price: "員工73,900 / 親友76,900", link: "https://travel.liontravel.com/detail?NormGroupID=80fceb1c-af15-4441-a1cf-bbe18bdb254b&GroupID=26ESD09EY-T&Platform=APP" },
-      { region: "奧地利&捷克", flag: "linear-gradient(135deg,#ed2939 0 28%,#fff 28% 48%,#ed2939 48% 66%,#11457e 66% 82%,#fff 82% 90%,#d7141a 90%)", name: "員工特選奧捷國王湖10日", code: "26EEN20JX", date: "11/20出發", price: "員工49,900 / 親友52,900", link: "https://travel.liontravel.com/detail?NormGroupID=3aa523a9-3527-4c4e-abea-c48cc45058ba&GroupID=26EEN20JX-T&Platform=APP" },
-      { region: "奧地利&捷克", flag: "linear-gradient(135deg,#ed2939 0 28%,#fff 28% 48%,#ed2939 48% 66%,#11457e 66% 82%,#fff 82% 90%,#d7141a 90%)", name: "員工特選奧捷國王湖10日", code: "26EED02JX", date: "12/02出發", price: "員工49,900 / 親友52,900", link: "https://travel.liontravel.com/detail?NormGroupID=3aa523a9-3527-4c4e-abea-c48cc45058ba&GroupID=26EED02JX-T&Platform=APP" },
-      { region: "德國&瑞士", flag: "linear-gradient(135deg,#000 0 24%,#dd0000 24% 45%,#ffce00 45% 64%,#d52b1e 64%)", name: "員工經典德瑞雙峰湖區景觀火車10日", code: "26EUD04CIA", date: "12/04出發", price: "員工67,900 / 親友69,900", link: "https://travel.liontravel.com/detail?NormGroupID=1c5cc65a-4cb2-4e6e-8052-6f9336fdeb82&GroupID=26EUD04CIA-T&Platform=APP" },
-      { region: "德國&瑞士", flag: "linear-gradient(135deg,#000 0 24%,#dd0000 24% 45%,#ffce00 45% 64%,#d52b1e 64%)", name: "員工經典德瑞雙峰湖區景觀火車10日", code: "27EU118CIA", date: "01/18出發", price: "員工67,900 / 親友69,900", link: "https://travel.liontravel.com/detail?NormGroupID=1c5cc65a-4cb2-4e6e-8052-6f9336fdeb82&GroupID=27EU118CIA-T&Platform=APP" },
-      { region: "義大利", flag: "linear-gradient(135deg,#009246 0 34%,#fff 34% 67%,#ce2b37 67%)", name: "員工特選北義五大名城多洛米緹10日", code: "26EID15CIC", date: "12/15出發", price: "員工57,900 / 親友59,900", link: "https://travel.liontravel.com/detail?NormGroupID=f8b0c16c-f92b-427d-acb2-7e5e2adcccc2&GroupID=26EID15CIC-T&Platform=APP" },
-      { region: "義大利", flag: "linear-gradient(135deg,#009246 0 34%,#fff 34% 67%,#ce2b37 67%)", name: "員工特選北義五大名城多洛米緹10日", code: "27EI119CIC", date: "01/19出發", price: "員工57,900 / 親友59,900", link: "https://travel.liontravel.com/detail?NormGroupID=f8b0c16c-f92b-427d-acb2-7e5e2adcccc2&GroupID=27EI119CIC-T&Platform=APP" },
-      { region: "荷比法", flag: "linear-gradient(135deg,#ae1c28 0 18%,#fff 18% 32%,#21468b 32% 46%,#000 46% 58%,#fae042 58% 70%,#ed2939 70% 82%,#fff 82% 91%,#002395 91%)", name: "員工經典荷比法羅浮宮三遊船(高雄)9日", code: "26EUN22CXK", date: "11/22出發", price: "員工59,900 / 親友62,900", link: "https://travel.liontravel.com/detail?NormGroupID=c1f9f32e-c5cb-4dc8-bad0-a304b0d10fad&GroupID=26EUN22CXK-T&Platform=APP" }
+      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選西班牙雙宮山城海濱小鎮11日", code: "26ESN15TKB", date: "11/15出發", price: "員工66,900 / 親友69,900" },
+      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選葡萄牙雙城輕漫遊Outlet10日", code: "26ESN23EY", date: "11/23出發", price: "員工53,900 / 親友56,900" },
+      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選西班牙巨石中段高第建築(冬)11日", code: "26ESD09EY", date: "12/09出發", price: "員工73,900 / 親友76,900" },
+      { region: "奧地利&捷克", flag: "linear-gradient(135deg,#ed2939 0 28%,#fff 28% 48%,#ed2939 48% 66%,#11457e 66% 82%,#fff 82% 90%,#d7141a 90%)", name: "員工特選奧捷國王湖10日", code: "26EEN20JX", date: "11/20出發", price: "員工49,900 / 親友52,900" },
+      { region: "奧地利&捷克", flag: "linear-gradient(135deg,#ed2939 0 28%,#fff 28% 48%,#ed2939 48% 66%,#11457e 66% 82%,#fff 82% 90%,#d7141a 90%)", name: "員工特選奧捷國王湖10日", code: "26EED02JX", date: "12/02出發", price: "員工49,900 / 親友52,900" },
+      { region: "荷比法", flag: "linear-gradient(135deg,#ae1c28 0 18%,#fff 18% 32%,#21468b 32% 46%,#000 46% 58%,#fae042 58% 70%,#ed2939 70% 82%,#fff 82% 91%,#002395 91%)", name: "員工經典荷比法羅浮宮三遊船(高雄)9日", code: "26EUN22CXK", date: "11/22出發", price: "員工59,900 / 親友62,900" },
+      { region: "德國&瑞士", flag: "linear-gradient(135deg,#000 0 24%,#dd0000 24% 45%,#ffce00 45% 64%,#d52b1e 64%)", name: "員工經典德瑞雙峰湖區景觀火車10日", code: "26EUD04CIA", date: "12/04出發", price: "員工67,900 / 親友69,900" },
+      { region: "德國&瑞士", flag: "linear-gradient(135deg,#000 0 24%,#dd0000 24% 45%,#ffce00 45% 64%,#d52b1e 64%)", name: "員工經典德瑞雙峰湖區景觀火車10日", code: "27EU118CIA", date: "01/18出發", price: "員工67,900 / 親友69,900" },
+      { region: "義大利", flag: "linear-gradient(135deg,#009246 0 34%,#fff 34% 67%,#ce2b37 67%)", name: "員工特選北義五大名城多洛米緹10日", code: "26EID15CIC", date: "12/15出發", price: "員工57,900 / 親友59,900" },
+      { region: "義大利", flag: "linear-gradient(135deg,#009246 0 34%,#fff 34% 67%,#ce2b37 67%)", name: "員工特選北義五大名城多洛米緹10日", code: "27EI119CIC", date: "01/19出發", price: "員工57,900 / 親友59,900" },
     ];
 
     const note = "皆為現金價，刷卡請自行+2%";
@@ -555,21 +556,16 @@
       items.forEach((tour) => {
         const key = [tour.region, tour.name, tour.price].join("|");
         if (!groups.has(key)) {
-          groups.set(key, { ...tour, dates: [], codes: [], codeLinks: [] });
+          groups.set(key, { ...tour, dates: [], codes: [] });
         }
         groups.get(key).dates.push(tour.date);
         groups.get(key).codes.push(tour.code);
-        groups.get(key).codeLinks.push({ code: tour.code, link: tour.link });
       });
       return [...groups.values()];
     }
 
     function renderCard(tour) {
       const priceLines = escapeHtml(tour.price).replace(" / ", " /<br>");
-      const codeLinks = tour.codeLinks.map((item) => {
-        if (!item.link) return `<span>${escapeHtml(item.code)}</span>`;
-        return `<a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(item.code)}</a>`;
-      }).join("、 ");
       return `
         <article class="tour-card">
           <div class="flag-badge" style="--flag:${tour.flag}" aria-label="${escapeHtml(tour.region)}"></div>
@@ -577,7 +573,7 @@
             <h2>${escapeHtml(tour.name)}</h2>
             <dl class="details">
               <div><dt>出發日</dt><dd>${escapeHtml(tour.dates.join("、"))}</dd></div>
-              <div><dt>團號</dt><dd class="code">${codeLinks}</dd></div>
+              <div><dt>團號</dt><dd class="code">${escapeHtml(tour.codes.join("、"))}</dd></div>
               <div><dt>備註</dt><dd>${note}</dd></div>
             </dl>
           </div>
