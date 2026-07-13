@@ -277,20 +277,34 @@
     }
 
     .details div {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
       gap: 12px;
+      align-items: start;
+    }
+
+    .details dt {
+      white-space: nowrap;
     }
 
     .details dd {
       margin: 0;
       color: var(--muted);
       text-align: right;
+      word-break: break-word;
     }
 
-    .details dd.code {
+    .details dd.code,
+    .details dd.code a,
+    .details dd.code span {
       color: #111827;
       font-weight: 1000;
+      text-decoration: none;
+    }
+
+    .details dd.code a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .price {
@@ -501,9 +515,9 @@
 
   <script>
     const tours = [
-      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選西班牙雙宮山城海濱小鎮11日", code: "26ESN15TKB", date: "11/15出發", price: "員工66,900 / 親友69,900" },
-      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選葡萄牙雙城輕漫遊Outlet10日", code: "26ESN23EY", date: "11/23出發", price: "員工53,900 / 親友56,900" },
-      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選西班牙巨石中段高第建築(冬)11日", code: "26ESD09EY", date: "12/09出發", price: "員工73,900 / 親友76,900" },
+      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選西班牙雙宮山城海濱小鎮11日", code: "26ESN15TKB", date: "11/15出發", price: "員工66,900 / 親友69,900", link: "https://travel.liontravel.com/detail?NormGroupID=aa2b4f96-fbf6-4cb7-94ee-2f69dce23c53&GroupID=26ESN15TKB-T&Platform=APP" },
+      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選葡萄牙雙城輕漫遊Outlet10日", code: "26ESN23EY", date: "11/23出發", price: "員工53,900 / 親友56,900", link: "https://travel.liontravel.com/detail?NormGroupID=b8533d3a-5f64-4e29-8c84-a5f219bbc77d&GroupID=26ESN23EY-T&Platform=APP" },
+      { region: "西班牙&葡萄牙", flag: "linear-gradient(135deg,#c60b1e 0 26%,#ffc400 26% 54%,#006600 54% 74%,#ff0000 74%)", name: "員工特選西班牙巨石中段高第建築(冬)11日", code: "26ESD09EY", date: "12/09出發", price: "員工73,900 / 親友76,900", link: "https://travel.liontravel.com/detail?NormGroupID=80fceb1c-af15-4441-a1cf-bbe18bdb254b&GroupID=26ESD09EY-T&Platform=APP" },
       { region: "奧地利&捷克", flag: "linear-gradient(135deg,#ed2939 0 28%,#fff 28% 48%,#ed2939 48% 66%,#11457e 66% 82%,#fff 82% 90%,#d7141a 90%)", name: "員工特選奧捷國王湖10日", code: "26EEN20JX", date: "11/20出發", price: "員工49,900 / 親友52,900" },
       { region: "奧地利&捷克", flag: "linear-gradient(135deg,#ed2939 0 28%,#fff 28% 48%,#ed2939 48% 66%,#11457e 66% 82%,#fff 82% 90%,#d7141a 90%)", name: "員工特選奧捷國王湖10日", code: "26EED02JX", date: "12/02出發", price: "員工49,900 / 親友52,900" },
       { region: "德國&瑞士", flag: "linear-gradient(135deg,#000 0 24%,#dd0000 24% 45%,#ffce00 45% 64%,#d52b1e 64%)", name: "員工經典德瑞雙峰湖區景觀火車10日", code: "26EUD04CIA", date: "12/04出發", price: "員工67,900 / 親友69,900" },
@@ -541,16 +555,21 @@
       items.forEach((tour) => {
         const key = [tour.region, tour.name, tour.price].join("|");
         if (!groups.has(key)) {
-          groups.set(key, { ...tour, dates: [], codes: [] });
+          groups.set(key, { ...tour, dates: [], codes: [], codeLinks: [] });
         }
         groups.get(key).dates.push(tour.date);
         groups.get(key).codes.push(tour.code);
+        groups.get(key).codeLinks.push({ code: tour.code, link: tour.link });
       });
       return [...groups.values()];
     }
 
     function renderCard(tour) {
       const priceLines = escapeHtml(tour.price).replace(" / ", " /<br>");
+      const codeLinks = tour.codeLinks.map((item) => {
+        if (!item.link) return `<span>${escapeHtml(item.code)}</span>`;
+        return `<a href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(item.code)}</a>`;
+      }).join("、 ");
       return `
         <article class="tour-card">
           <div class="flag-badge" style="--flag:${tour.flag}" aria-label="${escapeHtml(tour.region)}"></div>
@@ -558,7 +577,7 @@
             <h2>${escapeHtml(tour.name)}</h2>
             <dl class="details">
               <div><dt>出發日</dt><dd>${escapeHtml(tour.dates.join("、"))}</dd></div>
-              <div><dt>團號</dt><dd class="code">${escapeHtml(tour.codes.join("、"))}</dd></div>
+              <div><dt>團號</dt><dd class="code">${codeLinks}</dd></div>
               <div><dt>備註</dt><dd>${note}</dd></div>
             </dl>
           </div>
